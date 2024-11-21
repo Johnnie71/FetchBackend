@@ -1,54 +1,22 @@
-# Operating system files
-/.DS_Store
-/Thumbs.db
-
-# IDE files
-/.idea/
-/.vscode/
-
-# Build artifacts
-/bin/
-/dist/
-/pkg/
-
-# Compiled object files
-/*.o
-/*.a
-
-# Caching directories
-/vendor/
-/cache/
-
-# Executables
+# Binaries for programs and plugins
 *.exe
+*.exe~
+*.dll
+*.so
+*.dylib
 
-# Test results
-/test-results/
+# Test binary, built with `go test -c`
+*.test
 
-# Coverage reports
-/coverage/
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
 
-# Logs
-*.log
+# Dependency directories (remove the comment below to include it)
+# vendor/
 
-# IDE-specific files
-# Eclipse
-.classpath
-.project
-.settings/
+# Go workspace file
+go.work
+go.work.sum
 
-# IntelliJ IDEA
-*.iml
-/.idea/workspace.xml
-
-# Visual Studio Code
-.vscode/settings.json
-.vscode/tasks.json
-.vscode/launch.json
-
-# Vim
-.swp
-.swpx
-
-# Miscellaneous
-*~
+# env file
+.env
