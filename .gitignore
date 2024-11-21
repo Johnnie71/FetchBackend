@@ -1,0 +1,54 @@
+# Operating system files
+/.DS_Store
+/Thumbs.db
+
+# IDE files
+/.idea/
+/.vscode/
+
+# Build artifacts
+/bin/
+/dist/
+/pkg/
+
+# Compiled object files
+/*.o
+/*.a
+
+# Caching directories
+/vendor/
+/cache/
+
+# Executables
+*.exe
+
+# Test results
+/test-results/
+
+# Coverage reports
+/coverage/
+
+# Logs
+*.log
+
+# IDE-specific files
+# Eclipse
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA
+*.iml
+/.idea/workspace.xml
+
+# Visual Studio Code
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+
+# Vim
+.swp
+.swpx
+
+# Miscellaneous
+*~
