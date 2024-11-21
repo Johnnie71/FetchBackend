@@ -73,10 +73,12 @@ func calculatePoints(reciept Reciept) int {
                     }
                 }
             case "Items":
+                // Finding amount of pairs of items
                 numOfItems := field.Len()
                 pairs := numOfItems / 2
                 points += pairs * 5
-
+                
+                // Checking descriptions
                 for i := 0; i < numOfItems; i ++ {
                     item := field.Index(i)
 
@@ -125,7 +127,6 @@ func processReciept(c *gin.Context) {
         c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
-    // var totalPoints int
 
     total_points := calculatePoints(receipt)
     
@@ -133,8 +134,18 @@ func processReciept(c *gin.Context) {
     
     points[receiptId] = total_points
 
-    fmt.Println(points)
     c.JSON(http.StatusOK, gin.H{"id": receiptId})
+}
+
+func getRecieptsPoints(c *gin.Context) {
+    receiptID := c.Param("id")
+
+    if _, ok := points[receiptID]; ok {
+        c.JSON(http.StatusOK, gin.H{"points": points[receiptID]})
+    } else {
+        fmt.Println("ID not found:", receiptID)
+        c.JSON(http.StatusNotFound, gin.H{"error": fmt.Sprintf("Receipt ID %s not found", receiptID)})
+    }
 
 }
 
@@ -146,6 +157,7 @@ func main() {
     })
 
     router.POST("/receipts/process", processReciept)
+    router.GET("/receipts/:id/points", getRecieptsPoints)
 
     router.Run(":8080")
 }
