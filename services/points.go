@@ -24,10 +24,6 @@ func CalculatePoints(reciept models.Reciept) (int, error) {
 					case "Retailer":
 							retailerName := field.String()
 
-							if retailerName == "" {
-								return 0, fmt.Errorf("retailer name is empty")
-							}
-
 							for _, c := range retailerName {
 									if unicode.IsLetter(c) || unicode.IsDigit(c) {
 											points += 1
@@ -36,10 +32,6 @@ func CalculatePoints(reciept models.Reciept) (int, error) {
 							}
 					case "PurchaseDate":
 							purchaseDate := field.String()
-
-							if purchaseDate == "" {
-								return 0, fmt.Errorf("purchase date is empty")
-							}
 
 							parts := strings.Split(purchaseDate, "-")
 
@@ -62,10 +54,6 @@ func CalculatePoints(reciept models.Reciept) (int, error) {
 					case "PurchaseTime":
 							purchaseTime := field.String()
 
-							if purchaseTime == "" {
-								return 0, fmt.Errorf("purchase time is empty")
-							}
-							
 							timeOfPurchase, err := time.Parse("15:04", purchaseTime)
 			
 							if err != nil {

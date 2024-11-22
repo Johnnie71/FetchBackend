@@ -6,9 +6,9 @@ type Item struct {
 }
 
 type Reciept struct {
-	Retailer string `json:"retailer"`
-	PurchaseDate string `json:"purchaseDate"`
-	PurchaseTime string `json:"purchaseTime"`
-	Items []Item `json:"items"`
-	Total string `json:"total"`
+	Retailer    string `json:"retailer" validate:"required"`
+	PurchaseDate string `json:"purchaseDate" validate:"required"`
+	PurchaseTime string `json:"purchaseTime" validate:"required"`
+	Items        []Item `json:"items" validate:"required,min=1"`
+	Total        string `json:"total" validate:"required"`
 }

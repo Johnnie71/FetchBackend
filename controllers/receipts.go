@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
 )
 
@@ -16,8 +17,15 @@ func ProcessReciept(c *gin.Context) {
 	var receipt models.Reciept
 
 	if err := c.ShouldBindJSON(&receipt); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, gin.H{"error": "The receipt is invalid"})
 			return
+	}
+
+	validate := validator.New()
+	if err := validate.Struct(receipt); err != nil {
+		// If validation fails, return the validation error
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 
 	total_points, err := services.CalculatePoints(receipt); 
@@ -40,7 +48,7 @@ func GetRecieptsPoints(c *gin.Context) {
 			c.JSON(http.StatusOK, gin.H{"points": points[receiptID]})
 	} else {
 			fmt.Println("ID not found:", receiptID)
-			c.JSON(http.StatusNotFound, gin.H{"error": fmt.Sprintf("Receipt ID %s not found", receiptID)})
+			c.JSON(http.StatusNotFound, gin.H{"error": fmt.Sprintf("No receipt found for ID: %s", receiptID)})
 	}
 
 }
