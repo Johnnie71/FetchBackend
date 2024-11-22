@@ -20,7 +20,11 @@ func ProcessReciept(c *gin.Context) {
 			return
 	}
 
-	total_points := services.CalculatePoints(receipt)
+	total_points, err := services.CalculatePoints(receipt); 
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+    return
+	}
 	
 	receiptId := uuid.New().String()
 	
